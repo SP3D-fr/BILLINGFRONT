@@ -1,0 +1,135 @@
+/* Thème clair par défaut */
+.light-theme {
+  --bg: #f7f7fa;
+  --fg: #222;
+  --card: #fff;
+  --border: #ddd;
+  --primary: #ffa500;
+  --primary-hover: #ffbb33;
+  --accent: #28a745;
+  --danger: #dc3545;
+  --table-header: #f3f3f3;
+  --table-header-fg: #222;
+}
+
+/* Thème sombre harmonisé */
+.dark-theme {
+  --bg: #20232a;
+  --fg: #f3f3f3;
+  --card: #23232b;
+  --border: #353945;
+  --primary: #ffa500;
+  --primary-hover: #ffbb33;
+  --accent: #28d17c;
+  --danger: #ff5e5e;
+  --table-header: #282c34;
+  --table-header-fg: #ffa500;
+}
+
+body, html, #root {
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+h1, h2, h3 {
+  color: var(--fg);
+}
+
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 24px;
+  margin: 4px 0;
+  cursor: pointer;
+  background: var(--primary);
+  color: #222;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.dark-theme button {
+  color: #222;
+  background: var(--primary);
+  box-shadow: 0 1px 8px rgba(255,165,0,0.05);
+}
+button:hover, button:focus {
+  background: var(--primary-hover);
+  color: #222;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 6px 0 16px 0;
+  background: var(--card);
+  color: var(--fg);
+  box-sizing: border-box;
+  transition: border 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  border: 1.5px solid var(--primary);
+}
+
+/* Tableaux */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  color: var(--fg);
+  border-radius: 8px;
+  overflow: hidden;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 12px 10px;
+}
+th {
+  background: var(--table-header);
+  color: var(--table-header-fg);
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+/* Cartes et containers */
+.card, .container {
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 28px;
+  margin-bottom: 28px;
+}
+
+/* Correction : zone claire en mode sombre */
+.dark-theme .card, .dark-theme .container {
+  background: #262b33;
+}
+
+/* Notification */
+.dark-theme .notification {
+  background: #23232b !important;
+  color: #ffa500 !important;
+  border: 1.5px solid #ffa500;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .card, .container {
+    padding: 12px;
+  }
+  table, th, td {
+    font-size: 0.97em;
+    padding: 7px 4px;
+  }
+  button {
+    padding: 8px 10px;
+    font-size: 0.97em;
+  }
+}

@@ -1,0 +1,14 @@
+.navbar-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 18px !important;
+  margin-left: 8px !important;
+  min-width: 200px !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-end !important;
+}
+.navbar-actions button {
+  min-width: 110px;
+  white-space: nowrap;
+}

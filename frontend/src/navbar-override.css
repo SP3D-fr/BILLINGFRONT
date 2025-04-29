@@ -1,0 +1,39 @@
+/* Styles CSS forcés pour la navbar en mode sombre, priorité maximale */
+
+nav, .nav-links, .burger, nav button, nav span {
+  color: #fff !important;
+}
+nav {
+  background: #181818 !important;
+}
+nav button {
+  background: transparent !important;
+  border: none !important;
+  color: #fff !important;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  margin: 0;
+  outline: none;
+  transition: background 0.2s, color 0.2s;
+}
+nav button.active, nav button[aria-current="page"] {
+  background: #ffa500 !important;
+  color: #222 !important;
+  border: 2px solid #ffa500 !important;
+  font-weight: 700;
+}
+nav button:hover:not(.active):not([aria-current="page"]) {
+  background: #333 !important;
+  color: #fff !important;
+}
+
+@media (max-width: 900px) {
+  .nav-links { display: none !important; }
+  .burger { display: block !important; }
+}
+@media (min-width: 901px) {
+  .nav-links { display: flex !important; }
+  .burger { display: none !important; }
+}

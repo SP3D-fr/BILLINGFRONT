@@ -1,0 +1,54 @@
+/* Responsive design pour la webapp facturation/3D */
+
+@media (max-width: 900px) {
+  .card, .main-card, .settings-card {
+    max-width: 98vw !important;
+    margin: 16px auto !important;
+    padding: 12px !important;
+  }
+  table {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 15px;
+  }
+  .card, .main-card, .settings-card {
+    max-width: 100vw !important;
+    margin: 4px !important;
+    padding: 4vw !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  h2, h3 {
+    font-size: 1.1em;
+  }
+  table, thead, tbody, th, td, tr {
+    display: block;
+    width: 100%;
+  }
+  th, td {
+    padding: 6px 2px;
+    border: none !important;
+  }
+  table {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  button, input, select {
+    font-size: 1em !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 400px) {
+  .card, .main-card, .settings-card {
+    padding: 2vw !important;
+  }
+  h2, h3 {
+    font-size: 1em;
+  }
+}
