@@ -6,6 +6,8 @@ import EditInvoiceForm from './EditInvoiceForm';
 import Notification from './Notification';
 import authFetch from './authFetch';
 
+const apiUrl = process.env.REACT_APP_API_URL || '';
+
 export default function InvoicesPage() {
   const theme = useTheme();
   const [factures, setFactures] = useState([]);
@@ -17,14 +19,14 @@ export default function InvoicesPage() {
 
   useEffect(() => {
     Promise.all([
-      authFetch('http://localhost:5000/api/factures').then(res => {
+      authFetch(`${apiUrl}/api/factures`).then(res => {
         if (res.status === 401) {
           setError('Erreur d\'autorisation');
           return { error: 'Erreur d\'autorisation' };
         }
         return res.json();
       }),
-      authFetch('http://localhost:5000/api/clients').then(res => {
+      authFetch(`${apiUrl}/api/clients`).then(res => {
         if (res.status === 401) {
           setError('Erreur d\'autorisation');
           return { error: 'Erreur d\'autorisation' };
@@ -50,7 +52,7 @@ export default function InvoicesPage() {
   const handleDeleteInvoice = async (id) => {
     if (!window.confirm('Supprimer cette facture ?')) return;
     try {
-      const response = await authFetch(`http://localhost:5000/api/factures/${id}`, {
+      const response = await authFetch(`${apiUrl}/api/factures/${id}`, {
         method: 'DELETE'
       });
       if (!response.ok) throw new Error('Erreur lors de la suppression');
@@ -78,7 +80,7 @@ export default function InvoicesPage() {
   const handleCloseNotif = () => setNotif({ message: '', type: 'success' });
 
   const exportFacturesCSV = () => {
-    window.open('http://localhost:5000/api/export/factures', '_blank');
+    window.open(`${apiUrl}/api/export/factures`, '_blank');
   };
 
   // Ajout pour toast après envoi mail

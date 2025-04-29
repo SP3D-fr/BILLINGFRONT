@@ -12,6 +12,8 @@ export default function AddInvoiceForm({ clients, onAdd }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const apiUrl = process.env.REACT_APP_API_URL || '';
+
   // Sécurise clients pour éviter l'erreur .map
   const safeClients = Array.isArray(clients) ? clients : [];
 
@@ -19,7 +21,7 @@ export default function AddInvoiceForm({ clients, onAdd }) {
     if (safeClients.length > 0 && !clientId) {
       setClientId(safeClients[0].id);
     }
-    authFetch('http://localhost:5000/api/produits')
+    authFetch(`${apiUrl}/api/produits`)
       .then(res => res.json())
       .then(setAllProducts);
   }, [safeClients, clientId]);
@@ -50,7 +52,7 @@ export default function AddInvoiceForm({ clients, onAdd }) {
     setLoading(true);
     setError(null);
     try {
-      const response = await authFetch('http://localhost:5000/api/factures', {
+      const response = await authFetch(`${apiUrl}/api/factures`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

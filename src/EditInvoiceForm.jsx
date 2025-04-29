@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import authFetch from './authFetch';
 
+const apiUrl = process.env.REACT_APP_API_URL || '';
+
 export default function EditInvoiceForm({ facture, clients, onSave, onCancel }) {
   const [clientId, setClientId] = useState(facture.client_id);
   const [date, setDate] = useState(facture.date);
@@ -20,7 +22,7 @@ export default function EditInvoiceForm({ facture, clients, onSave, onCancel }) 
     if (clients.length > 0 && !clientId) {
       setClientId(clients[0].id);
     }
-    fetch('http://localhost:5000/api/produits')
+    fetch(`${apiUrl}/api/produits`)
       .then(res => res.json())
       .then(setAllProducts);
   }, [clients, clientId]);
@@ -50,7 +52,7 @@ export default function EditInvoiceForm({ facture, clients, onSave, onCancel }) 
     setLoading(true);
     setError(null);
     try {
-      const response = await authFetch(`http://localhost:5000/api/factures/${facture.id}`, {
+      const response = await authFetch(`${apiUrl}/api/factures/${facture.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

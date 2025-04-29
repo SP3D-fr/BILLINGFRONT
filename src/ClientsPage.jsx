@@ -6,8 +6,10 @@ import AddClientForm from './AddClientForm';
 import EditClientForm from './EditClientForm';
 import Notification from './Notification';
 
+const apiUrl = process.env.REACT_APP_API_URL || '';
+
 function exportClientsCSV() {
-  window.open('http://localhost:5000/api/export/clients', '_blank');
+  window.open(`${apiUrl}/api/export/clients`, '_blank');
 }
 
 export default function ClientsPage() {
@@ -19,7 +21,7 @@ export default function ClientsPage() {
   const [notif, setNotif] = useState({ message: '', type: 'success' });
 
   useEffect(() => {
-    authFetch('http://localhost:5000/api/clients')
+    authFetch(`${apiUrl}/api/clients`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) setClients(data);
@@ -37,7 +39,7 @@ export default function ClientsPage() {
   const handleDeleteClient = async (id) => {
     if (!window.confirm('Supprimer ce client ?')) return;
     try {
-      const response = await fetch(`http://localhost:5000/api/clients/${id}`, { method: 'DELETE' });
+      const response = await fetch(`${apiUrl}/api/clients/${id}`, { method: 'DELETE' });
       if (!response.ok) throw new Error('Erreur lors de la suppression');
       setClients((prev) => prev.filter((c) => c.id !== id));
       setNotif({ message: 'Client supprimé', type: 'success' });

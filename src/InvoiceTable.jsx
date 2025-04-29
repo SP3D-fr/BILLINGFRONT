@@ -4,9 +4,10 @@ import SendInvoiceModal from './SendInvoiceModal';
 export default function InvoiceTable({ factures, onDelete, onEdit, onMailSent }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedFacture, setSelectedFacture] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL || '';
 
   const handleDownloadPDF = (id) => {
-    window.open(`http://localhost:5000/api/factures/${id}/pdf`, '_blank');
+    window.open(`${apiUrl}/api/factures/${id}/pdf`, '_blank');
   };
 
   const handleSendMail = (facture) => {

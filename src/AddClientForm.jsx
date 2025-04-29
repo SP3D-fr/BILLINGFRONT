@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import authFetch from './authFetch';
 
+// Définition de l'URL API globale
+const apiUrl = process.env.REACT_APP_API_URL || '';
+
 export default function AddClientForm({ onAdd }) {
   const [nom, setNom] = useState('');
   const [email, setEmail] = useState('');
@@ -14,7 +17,7 @@ export default function AddClientForm({ onAdd }) {
     setLoading(true);
     setError(null);
     try {
-      const response = await authFetch('http://localhost:5000/api/clients', {
+      const response = await authFetch(`${apiUrl}/api/clients`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nom, email, telephone, adresse })

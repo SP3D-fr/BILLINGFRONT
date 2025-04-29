@@ -13,9 +13,10 @@ export default function ProductsPage() {
   const [error, setError] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null);
   const [notif, setNotif] = useState({ message: '', type: 'success' });
+  const apiUrl = process.env.REACT_APP_API_URL || '';
 
   useEffect(() => {
-    authFetch('http://localhost:5000/api/produits')
+    authFetch(`${apiUrl}/api/produits`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -37,7 +38,7 @@ export default function ProductsPage() {
   const handleDeleteProduct = async (id) => {
     if (!window.confirm('Supprimer ce produit ?')) return;
     try {
-      const response = await authFetch(`http://localhost:5000/api/produits/${id}`, { method: 'DELETE' });
+      const response = await authFetch(`${apiUrl}/api/produits/${id}`, { method: 'DELETE' });
       if (!response.ok) throw new Error('Erreur lors de la suppression');
       setProduits(prev => prev.filter(p => p.id !== id));
       setNotif({ message: 'Produit supprimé', type: 'success' });
@@ -63,7 +64,7 @@ export default function ProductsPage() {
   const handleCloseNotif = () => setNotif({ message: '', type: 'success' });
 
   const exportProduitsCSV = () => {
-    window.open('http://localhost:5000/api/export/produits', '_blank');
+    window.open(`${apiUrl}/api/export/produits`, '_blank');
   }
 
   if (loading) return <div style={{color: theme.text}}>Chargement des produits...</div>;

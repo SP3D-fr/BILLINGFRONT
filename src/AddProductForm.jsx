@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import authFetch from './authFetch';
 
 export default function AddProductForm({ onAdd }) {
+  const apiUrl = process.env.REACT_APP_API_URL || '';
   const [nom, setNom] = useState('');
   const [prix, setPrix] = useState('');
   const [description, setDescription] = useState('');
@@ -13,7 +14,7 @@ export default function AddProductForm({ onAdd }) {
     setLoading(true);
     setError(null);
     try {
-      const response = await authFetch('http://localhost:5000/api/produits', {
+      const response = await authFetch(`${apiUrl}/api/produits`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nom, prix: parseFloat(prix), description })

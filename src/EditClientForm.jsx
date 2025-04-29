@@ -8,12 +8,14 @@ export default function EditClientForm({ client, onSave, onCancel }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const apiUrl = process.env.REACT_APP_API_URL || '';
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`http://localhost:5000/api/clients/${client.id}`, {
+      const response = await fetch(`${apiUrl}/api/clients/${client.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nom, email, telephone, adresse })
