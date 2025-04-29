@@ -16,7 +16,14 @@ export default function LoginPage({ onLogin, onShowReset }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
-      const data = await res.json();
+      let data = null;
+      try {
+        data = await res.json();
+      } catch (err) {
+        setError("Réponse du serveur invalide ou vide.");
+        setLoading(false);
+        return;
+      }
       if (!res.ok) throw new Error(data.message || 'Erreur de connexion');
       // Stocke le token dans sessionStorage
       if (data.token) sessionStorage.setItem('token', data.token);
